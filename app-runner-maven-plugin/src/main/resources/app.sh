@@ -122,6 +122,11 @@ function start
  if [ $VAR_STATUS == $STATUS_STOPPED ]; then
   echo "--------------------------------------------------------------------------------"
   echo " - APP         : ${APP_FILENAME}"
+  if [ -z ${APP_JAVA_HOME} ] ; then
+   logMessage "APP_JAVA_HOME is missing, use the default"
+   APP_JAVA_HOME=`whereis java | cut -d " " -f 2 | sed -r 's/\/bin\/java//g'`
+  fi
+  
   echo " - JAVA_HOME   : ${APP_JAVA_HOME}"
   echo " - JAVA_OPTS   : ${APP_JAVA_OPTS}"
   echo " - SERVER PORT : ${APP_LISTEN_PORT}"
@@ -142,6 +147,9 @@ function start
   CMD_LINE="${APP_JAVA_HOME}/bin/java ${APP_JAVA_OPTS} -Dapp.id=${APP_ID} -Dnode.home=${NODE_HOME} -DLOG_FILE=${APP_LOG_FILE}"
   CMD_LINE="${CMD_LINE} -jar ${APPDIR}/${APP_FILENAME} server"
   CMD_LINE="${CMD_LINE} --spring.config.location=${CFGDIR}/application.yml"
+  if [ -f ${CFGDIR}/configuration.yml ] ; then
+   CMD_LINE=",${CFGDIR}/configuration.yml"
+  fi
   CMD_LINE="${CMD_LINE} --logging.config=${CFGDIR}/logback.xml"
   CMD_LINE="${CMD_LINE} --server.port=${APP_LISTEN_PORT}"
   
