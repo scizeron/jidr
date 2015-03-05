@@ -61,16 +61,17 @@ function usage
  
  echo ""
  echo "Options:"
+ echo "  -s3b      : AWS S3 repository apps bucket."
  echo "  -nu       : Nexus search Url."
  echo "  -rn       : Release repository Name." 
  echo "  -sn       : Snapshot repository Name."
  echo "  -ag       : Application GroupId."
- echo "  -aa       : Application ArtifactId."
+ echo "  -ai       : Application ArtifactId."
  echo "  -av       : Application Version."
  echo "  -ap       : Application Packaging."
  echo "  -ac       : Application Classifier."
  echo "  -cg       : Configuration GroupId."
- echo "  -ca       : Configuration ArtifactId."
+ echo "  -ci       : Configuration ArtifactId."
  echo "  -cv       : Configuration Version."
  echo "  -cp       : Configuration Packaging."
  echo "  -cc       : Configuration Classifier."
@@ -145,6 +146,7 @@ function download
  ARTIFACT_ID=$2
  ARTIFACT_VERSION=$3
  ARTIFACT_PACKAGING=$4
+ USE_S3=1
  
  # le classifier est facultatif
  if [ $# -eq 5 ]; then
@@ -155,26 +157,55 @@ function download
  
  ARTIFACT_SNAPSHOT=`echo ${ARTIFACT_VERSION} | grep SNAPSHOT`
  
+ if [ ! -z ${S3_BUCKET} ] ; then
+  USE_S3=0
+  logMessage "Use aws s3 repository : ${S3_BUCKET}."
+ fi
+  
  if [ "${ARTIFACT_SNAPSHOT}" == "${ARTIFACT_VERSION}" ]; then
   REPO_NAME=${SNAPSHOT_REPOSITORY_NAME}
  else
   REPO_NAME=${RELEASE_REPOSITORY_NAME}
  fi 
  
- DOWNLOAD_ARTIFACT_URL="${NEXUS_SEARCH_URL}?r=${REPO_NAME}&g=${ARTIFACT_GROUP}&a=${ARTIFACT_ID}&v=${ARTIFACT_VERSION}&e=${ARTIFACT_PACKAGING}"
- ARTIFACT="${ARTIFACT_GROUP}:${ARTIFACT_ID}:${ARTIFACT_PACKAGING}:${ARTIFACT_VERSION}"
+ if [ $USE_S3 -eq 0 ] ; then
+  GROUP_URL=`echo ${ARTIFACT_GROUP} | sed  -r 's/\./\//g'`
+  logMessage "GROUP_URL: ${GROUP_URL}"
+  DOWNLOAD_ARTIFACT_URL="s3://${S3_BUCKET}/${GROUP_URL}/${ARTIFACT_ID}/${ARTIFACT_VERSION}/${ARTIFACT_ID}-${ARTIFACT_VERSION}"
+  if [ "X${ARTIFACT_CLASSIFIER}" != "X" ]; then
+   DOWNLOAD_ARTIFACT_URL="${DOWNLOAD_ARTIFACT_URL}-${ARTIFACT_CLASSIFIER}.${ARTIFACT_PACKAGING}"
+  fi
+  
+  logMessage "Artifact: ${ARTIFACT} on aws s3 ${S3_BUCKET}."
+  
+  DOWNLOAD_ARTIFACT_URL="s3://${S3_BUCKET}/${ARTIFACT_GROUP}/${ARTIFACT_ID}/${ARTIFACT_VERSION}/${ARTIFACT_ID}-${ARTIFACT_VERSION}"
+  if [ "X${ARTIFACT_CLASSIFIER}" != "X" ]; then
+   ARTIFACT_FILENAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_CLASSIFIER}.${ARTIFACT_PACKAGING}"
+   ARTIFACT="${ARTIFACT}:${ARTIFACT_CLASSIFIER}"
+   DOWNLOAD_ARTIFACT_URL="${DOWNLOAD_ARTIFACT_URL}-${ARTIFACT_CLASSIFIER}"
+  else
+   ARTIFACT_FILENAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}.${ARTIFACT_PACKAGING}"
+  fi
+  
+  DOWNLOAD_ARTIFACT_URL="${DOWNLOAD_ARTIFACT_URL}.${ARTIFACT_PACKAGING}"
+  aws s3 cp ${DOWNLOAD_ARTIFACT_URL} ${WORK_DIR}/${ARTIFACT_FILENAME}
  
- if [ "X${ARTIFACT_CLASSIFIER}" != "X" ]; then
-  ARTIFACT_FILENAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_CLASSIFIER}.${ARTIFACT_PACKAGING}"
-  ARTIFACT="${ARTIFACT}:${ARTIFACT_CLASSIFIER}"
-  DOWNLOAD_ARTIFACT_URL="${DOWNLOAD_ARTIFACT_URL}&c=${ARTIFACT_CLASSIFIER}"
  else
-  ARTIFACT_FILENAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}.${ARTIFACT_PACKAGING}"
- fi
  
- logMessage "Artifact: ${ARTIFACT} on ${REPO_NAME}."
- logMessage "Download ${DOWNLOAD_ARTIFACT_URL} to ${WORK_DIR}/${ARTIFACT_FILENAME} ..."
- wget --no-proxy ${DOWNLOAD_ARTIFACT_URL} -q -O ${WORK_DIR}/${ARTIFACT_FILENAME}
+  DOWNLOAD_ARTIFACT_URL="${NEXUS_SEARCH_URL}?r=${REPO_NAME}&g=${ARTIFACT_GROUP}&a=${ARTIFACT_ID}&v=${ARTIFACT_VERSION}&e=${ARTIFACT_PACKAGING}"
+  ARTIFACT="${ARTIFACT_GROUP}:${ARTIFACT_ID}:${ARTIFACT_PACKAGING}:${ARTIFACT_VERSION}"
+  if [ "X${ARTIFACT_CLASSIFIER}" != "X" ]; then
+   ARTIFACT_FILENAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_CLASSIFIER}.${ARTIFACT_PACKAGING}"
+   ARTIFACT="${ARTIFACT}:${ARTIFACT_CLASSIFIER}"
+   DOWNLOAD_ARTIFACT_URL="${DOWNLOAD_ARTIFACT_URL}&c=${ARTIFACT_CLASSIFIER}"
+  else
+   ARTIFACT_FILENAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}.${ARTIFACT_PACKAGING}"
+  fi
+  logMessage "Artifact: ${ARTIFACT} on ${REPO_NAME}."
+  logMessage "Download ${DOWNLOAD_ARTIFACT_URL} to ${WORK_DIR}/${ARTIFACT_FILENAME} ..."
+  wget --no-proxy ${DOWNLOAD_ARTIFACT_URL} -q -O ${WORK_DIR}/${ARTIFACT_FILENAME}
+ fi
+
  RESULT=$?
  logMessage "Result : $RESULT"
  
@@ -682,6 +713,11 @@ while [ $# != 0 ]
    fi  
    MANAGEMENT_URI="-u $1"
    shift
+   ;;  
+  -s3b)
+   shift
+   S3_BUCKET=$1
+   shift
    ;;       
   -nu)
    shift
@@ -735,7 +771,7 @@ while [ $# != 0 ]
    ;;
   -cc)
    shift
-   if [! -z $1 ]; then   
+   if  [ ! -z $1 ]; then   
    	CONF_ARTIFACT_CLASSIFIER=$1
    	shift
    fi
