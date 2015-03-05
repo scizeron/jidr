@@ -121,11 +121,12 @@ function start
   echo "--------------------------------------------------------------------------------"
   echo " - APP         : ${APP_FILENAME}"
   if [ -z ${APP_JAVA_HOME} ] ; then
-   logMessage "APP_JAVA_HOME is missing, use the default"
    APP_JAVA_HOME=`whereis java | cut -d " " -f 2 | sed -r 's/\/bin\/java//g'`
+	echo " - JAVA_HOME   : ${APP_JAVA_HOME} - APP_JAVA_HOME is missing, use the default"
+  else
+	echo " - JAVA_HOME   : ${APP_JAVA_HOME}"
   fi
   
-  echo " - JAVA_HOME   : ${APP_JAVA_HOME}"
   echo " - JAVA_OPTS   : ${APP_JAVA_OPTS}"
   echo " - SERVER PORT : ${APP_LISTEN_PORT}"
 
