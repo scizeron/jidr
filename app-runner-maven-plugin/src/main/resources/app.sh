@@ -148,7 +148,7 @@ function start
   CMD_LINE="${CMD_LINE} -jar ${APPDIR}/${APP_FILENAME} server"
   CMD_LINE="${CMD_LINE} --spring.config.location=${CFGDIR}/application.yml"
   if [ -f ${CFGDIR}/configuration.yml ] ; then
-   CMD_LINE=",${CFGDIR}/configuration.yml"
+   CMD_LINE="${CMD_LINE},${CFGDIR}/configuration.yml"
   fi
   CMD_LINE="${CMD_LINE} --logging.config=${CFGDIR}/logback.xml"
   CMD_LINE="${CMD_LINE} --server.port=${APP_LISTEN_PORT}"
@@ -438,7 +438,7 @@ function convertWindowsFile
   mv ${1} ${1}_tmp
   awk '{ sub("\r$", ""); print }' ${1}_tmp > ${1}
   rm ${1}_tmp
- else 
+ elif [ ${1} != $RUN_FILE ] ; then
   logError "${1} is missing"
   exit $EXIT_KO
  fi
@@ -460,7 +460,10 @@ function loadConfigurationFiles
 loadConfigurationFiles
 
 . $ARTIFACT_FILE
-. $RUN_FILE
+
+if [ -f $RUN_FILE ] ; then
+ . $RUN_FILE
+fi
 
 if [ $# -eq 0 ]; then
  usage
