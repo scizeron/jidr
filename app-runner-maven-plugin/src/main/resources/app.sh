@@ -31,8 +31,6 @@ LOCKFILE=$RUNDIR/app.lock
 ARTIFACT_FILE=$CFGDIR/artifact.cfg
 RUN_FILE=$CFGDIR/run.cfg
 
-NODE_HOME=`(cd "$BASEDIR/../.."; pwd)`
-
 GOAL_CONFIG=1
 GOAL_STOP=1
 GOAL_START=1
@@ -144,7 +142,10 @@ function start
   fi 
   echo "--------------------------------------------------------------------------------"
 
-  CMD_LINE="${APP_JAVA_HOME}/bin/java ${APP_JAVA_OPTS} -Dapp.id=${APP_ID} -Dnode.home=${NODE_HOME} -DLOG_FILE=${APP_LOG_FILE}"
+  CMD_LINE="${APP_JAVA_HOME}/bin/java ${APP_JAVA_OPTS}"
+  CMD_LINE="${CMD_LINE} -Dapp.id=${APP_ID}"
+  CMD_LINE="${CMD_LINE} -DLOG_FILE=${APP_LOG_FILE}"
+  CMD_LINE="${CMD_LINE} -Dexternal.config.dir=${CFGDIR}"
   CMD_LINE="${CMD_LINE} -jar ${APPDIR}/${APP_FILENAME} server"
   CMD_LINE="${CMD_LINE} --spring.config.location=${CFGDIR}/application.yml"
   if [ -f ${CFGDIR}/configuration.yml ] ; then
