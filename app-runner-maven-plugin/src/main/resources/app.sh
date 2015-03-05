@@ -419,11 +419,11 @@ function initConfiguration
 
  if [ $OPTION_DEBUG -eq 0 ]; then
   echo " ************** DEBUG CONFIG INFO **************"
-  echo " - APP_LISTEN_PORT             : $APP_LISTEN_PORT]"
-  echo " - APP_MANAGEMENT_PORT         : $APP_MANAGEMENT_PORT]"
-  echo " - APP_MANAGEMENT_CONTEXT_PATH : $APP_MANAGEMENT_CONTEXT_PATH]"
-  echo " - HCHECK_URI                  : $HCHECK_URI]"
-  echo " - RELOAD_CONFIG_URI           : $RELOAD_CONFIG_URI]"
+  echo " - APP_LISTEN_PORT             : $APP_LISTEN_PORT"
+  echo " - APP_MANAGEMENT_PORT         : $APP_MANAGEMENT_PORT"
+  echo " - APP_MANAGEMENT_CONTEXT_PATH : $APP_MANAGEMENT_CONTEXT_PATH"
+  echo " - HCHECK_URI                  : $HCHECK_URI"
+  echo " - RELOAD_CONFIG_URI           : $RELOAD_CONFIG_URI"
   echo " - APP_FILENAME                : $APP_FILENAME"
   echo " - APP_ID                      : $APP_ID"    
   echo " - APP_LOG_FILE                : $APP_LOG_FILE" 
