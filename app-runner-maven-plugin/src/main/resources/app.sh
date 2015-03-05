@@ -426,9 +426,14 @@ function initConfiguration
 # ----------------------------------------------------------------------------
 function convertWindowsFile
 {
- mv ${1} ${1}_tmp
- awk '{ sub("\r$", ""); print }' ${1}_tmp > ${1}
- rm ${1}_tmp
+ if [ -f ${1} ] ; then
+  mv ${1} ${1}_tmp
+  awk '{ sub("\r$", ""); print }' ${1}_tmp > ${1}
+  rm ${1}_tmp
+ else 
+  logError "${1} is missing"
+  exit $EXIT_KO
+ fi
 }
 
 # ----------------------------------------------------------------------------
