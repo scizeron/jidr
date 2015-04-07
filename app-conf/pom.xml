@@ -7,7 +7,7 @@
 	<parent>
    <artifactId>jidr</artifactId>
    <version>1.0.4-SNAPSHOT</version>
-   <groupId>com.stfciz</groupId>
+   <groupId>com.stfciz.jidr</groupId>
 	</parent>
 
 	<build>

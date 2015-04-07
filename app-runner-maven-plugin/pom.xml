@@ -10,7 +10,7 @@
   </properties>
 
   <parent>
-    <groupId>com.stfciz</groupId>
+    <groupId>com.stfciz.jidr</groupId>
     <artifactId>jidr</artifactId>
     <version>1.0.4-SNAPSHOT</version>
   </parent>
