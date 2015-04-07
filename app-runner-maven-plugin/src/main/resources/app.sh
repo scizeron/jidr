@@ -145,7 +145,7 @@ function start
 
   CMD_LINE="${APP_JAVA_HOME}/bin/java ${APP_JAVA_OPTS}"
   CMD_LINE="${CMD_LINE} -Dapp.id=${APP_ID}"
-  #CMD_LINE="${CMD_LINE} -DLOG_FILE=${APP_LOG_FILE}"
+  CMD_LINE="${CMD_LINE} -DLOG_FILE=${APP_LOG_FILE}"
   CMD_LINE="${CMD_LINE} -Dexternal.config.dir=${CFGDIR}"
   CMD_LINE="${CMD_LINE} -jar ${APPDIR}/${APP_FILENAME} server"
   CMD_LINE="${CMD_LINE} --spring.config.location=${CFGDIR}/application.yml"
