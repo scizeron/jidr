@@ -21,9 +21,9 @@
   </developers>
 
   <scm>
-    <connection>scm:https://gitlab.com/Stf/jidr.git</connection>
-    <developerConnection>scm:https://gitlab.com/Stf/jidr.git</developerConnection>
-    <url>scm:https://gitlab.com/Stf/jidr.git</url>
+    <connection>scm:git:https://gitlab.com/Stf/jidr.git</connection>
+    <developerConnection>scm:git:https://gitlab.com/Stf/jidr.git</developerConnection>
+    <url>scm:git:https://gitlab.com/Stf/jidr.git</url>
   </scm>
 
   <modules>
