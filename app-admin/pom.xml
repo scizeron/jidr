@@ -6,7 +6,7 @@
   <name>App Admin</name>
   
   <parent>
-  	<groupId>com.stfciz.jidr</groupId>
+  	<groupId>com.github.scizeron</groupId>
   	<artifactId>jidr</artifactId>
   	<version>1.0.4-SNAPSHOT</version>
     <relativePath>../</relativePath>
