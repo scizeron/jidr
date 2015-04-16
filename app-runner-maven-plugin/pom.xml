@@ -2,9 +2,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>app-runner-maven-plugin</artifactId>
-  <packaging>maven-plugin</packaging>
   <name>App Runner Maven Plugin</name>
-
+  <packaging>maven-plugin</packaging>
+  
   <properties>
     <maven.version>2.2.1</maven.version>
   </properties>
@@ -13,6 +13,7 @@
     <groupId>com.stfciz.jidr</groupId>
     <artifactId>jidr</artifactId>
     <version>1.0.4-SNAPSHOT</version>
+    <relativePath>../</relativePath>
   </parent>
 
   <build>
