@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.stfciz.jidr</groupId>
+  <groupId>com.github.scizeron</groupId>
   <artifactId>jidr</artifactId>
   <packaging>pom</packaging>
   <version>1.0.4-SNAPSHOT</version>
@@ -25,9 +25,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:https://gitlab.com/Stf/jidr.git</connection>
-    <developerConnection>scm:git:https://gitlab.com/Stf/jidr.git</developerConnection>
-    <url>scm:git:https://gitlab.com/Stf/jidr.git</url>
+    <connection>scm:git:https://github.com/scizeron/jidr.git</connection>
+    <developerConnection>scm:git:https://github.com/scizeron/jidr.git</developerConnection>
+    <url>scm:git:https://github.com/scizeron/jidr.git</url>
     <tag>HEAD</tag>
   </scm>
 
