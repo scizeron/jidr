@@ -25,15 +25,20 @@
   <artifactId>jidr-parent</artifactId>
   <packaging>pom</packaging>
   <version>1.0.5-SNAPSHOT</version>
-  <name>Java Install Deploy Run</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  <name>Java Install Deploy Run</name>
+  <description>Java Install Deploy Run</description>
+  <url>https://github.com/scizeron/jidr</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
-      <id>stfciz</id>
       <name>Stephane Cizeron</name>
       <email>stephane.cizeron@gmail.com</email>
       <roles>
@@ -48,18 +53,22 @@
     <url>https://github.com/scizeron/jidr</url>
   </scm>
 
-<!--   <distributionManagement> -->
-<!--     <snapshotRepository> -->
-<!--       <id>sonatype-nexus-snapshots</id> -->
-<!--       <name>Sonatype Nexus snapshot repository</name> -->
-<!--       <url>https://oss.sonatype.org/content/repositories/snapshots</url> -->
-<!--     </snapshotRepository> -->
-<!--     <repository> -->
-<!--       <id>sonatype-nexus-staging</id> -->
-<!--       <name>Sonatype Nexus release repository</name> -->
-<!--       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url> -->
-<!--     </repository> -->
-<!--   </distributionManagement> -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Sonatype Nexus snapshot repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>sonatype-nexus-staging</id>
+      <name>Sonatype Nexus release repository</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <plugins>
