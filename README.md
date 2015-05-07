@@ -47,8 +47,7 @@ It can also reveive specfic command (management, counter ...)
 
 The application and the configuration files can be located on a nexus instance (search API) or in a Amazon S3 bucket.
 
-
-## Package the application
+# Package the application
 
 Add the maven plugin in your pom.xml application in order to produce a 'distrib' zip file.
 
@@ -64,23 +63,21 @@ Add the maven plugin in your pom.xml application in order to produce a 'distrib'
      </executions>
     </plugin>
 
-## Package the configuration
+# Package the configuration
 
 In a zip file, you add all is expected by your application. 
 
-## Artifact naming examples 
+# Artifact naming examples 
 
 * **application**: my-app will give my-app-_version_-**distrib**.**zip**
 * **conf dev** : my-app-**conf-dev** will give my-app-**conf-dev**-_version_.**zip**
 * **conf prod** : my-app-**conf-prod** will give my-app-**conf-prod**-_version_.**zip**
 
-
 # Bootstrap _admin_
 
 The admin.sh must be installed on the target application nodes (once per application and a application supports several versions).
 
-
-# _app_ Installation
+# _app_ installation
 
 Invoke the following command with the following options : 
     
@@ -104,7 +101,7 @@ Invoke the following command with the following options :
 When the new application is installed, its location is under **versions/**. 
 A symbolic link **to_deploy** refereces the application directory. It will be present for the next step **deploy**
  
-# _deploy_
+# _app_ deployment
  
 Invoke the following command : 
     
@@ -113,18 +110,17 @@ Invoke the following command :
 If the current version is running, it will be stopped and flagged as _previous_ if rollback is needed.
 The **to_deploy** application becomes the **current** application.
 
-# _rollback_
+# _app_ rollback
  
 Invoke the following command  if the previous deployment has been failed : 
     
     admin.sh rollback
 
-# _run_
+# _app_ run
 
 The usual commands are performed on the **current"" version application.
 
-
-# multiple versions
+# _app_ versions
 
 Suppose you have versions : 1.0, 1.1 and you want to deploy the 1.2.
 
@@ -156,10 +152,5 @@ After installing , the old version 1.0 has been removed
 # keywords
 
 java, spring-boot, spring-boot-actuator, versionning, shell 
- 
 
-
-
-
- 
 
