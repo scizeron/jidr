@@ -77,7 +77,7 @@
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>v{project.version}.RELEASE</tagNameFormat>
-          <preparationGoals>clean install -Dmaven.test.skip=true</preparationGoals>
+          <preparationGoals>clean package -Dmaven.test.skip=true</preparationGoals>
         </configuration>
       </plugin>
     </plugins>
