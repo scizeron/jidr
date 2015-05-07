@@ -13,14 +13,13 @@ The zip file entries are :
 * conf/ :  configuration directory
 * app/ : spring-boot application jar file
 
-The application configuration is also packaged in a zip file (with a env classifier)
+The application configuration is also packaged in a zip file.
 
-The "install" phase adds the configuration content in the application conf/ sub directory.
+The "install" phase merges the configuration content in the application conf/ sub directory.
 
-The admin script supports the application versionning : install and deploy the 1.2.0, install the next, rollback.
-The old applications versions are purged when a new one is installed and when the installed application number is reached. 
+The admin script supports the application versionning : install and deploy the 1.2.0, install the next one, rollback.
 
-# admin
+# admin.sh _script_
 
 It can perform :
 
@@ -32,9 +31,9 @@ It can perform :
 
 Some new specific commands can be added in order to be forwared to the application.
 
-# app
+# app.sh _script_
 
-It receives commands from admin wich are :
+It receives commands from the admin script :
 
 * start
 * stop
@@ -44,9 +43,9 @@ It receives commands from admin wich are :
  
 It can also reveive specfic command (management, counter ...)
 
-# content repositories
+# Repositories
 
-The application and the configuration files can be located on a nexus instance (search API) or on a Amazon S3 bucket.
+The application and the configuration files can be located on a nexus instance (search API) or in a Amazon S3 bucket.
 
 
 ## Package the application
@@ -67,7 +66,7 @@ Add the maven plugin in your pom.xml application in order to produce a 'distrib'
 
 ## Package the configuration
 
-In a zip file, you add all what is expected by your application. 
+In a zip file, you add all is expected by your application. 
 
 ## Artifact naming examples 
 
@@ -78,12 +77,12 @@ In a zip file, you add all what is expected by your application.
 
 # Bootstrap _admin_
 
-The admin.sh must be installed on the application nodes
+The admin.sh must be installed on the target application nodes (once per application and a application supports several versions).
 
 
 # _app_ Installation
 
-Invoke the following command with the following parameters : 
+Invoke the following command with the following options : 
     
     admin.sh install
 
@@ -107,17 +106,22 @@ A symbolic link **to_deploy** refereces the application directory. It will be pr
  
 # _deploy_
  
-Invoke the following command with the following parameters : 
+Invoke the following command : 
     
     admin.sh deploy
 
 If the current version is running, it will be stopped and flagged as _previous_ if rollback is needed.
 The **to_deploy** application becomes the **current** application.
 
+# _rollback_
+ 
+Invoke the following command  if the previous deployment has been failed : 
+    
+    admin.sh rollback
 
 # _run_
 
-The usuals commands are performed on the application **current"" version.
+The usual commands are performed on the **current"" version application.
 
 
 # multiple versions
