@@ -47,7 +47,7 @@ import org.apache.maven.project.MavenProjectHelper;
  * Zip package a jar application with sub dirs : app, bin, conf
  * 
  */
-@Mojo( name = "distrib", requiresDependencyResolution = ResolutionScope.COMPILE, defaultPhase = LifecyclePhase.VERIFY )
+@Mojo( name = "package", requiresDependencyResolution = ResolutionScope.COMPILE, defaultPhase = LifecyclePhase.VERIFY)
 public class JidrPackageApp extends AbstractMojo {
 
   /**
@@ -78,7 +78,7 @@ public class JidrPackageApp extends AbstractMojo {
    * 
    */
   @Parameter(defaultValue="distrib")
-  private String              distribClassifier;
+  private String              classifier;
 
   @Override
   public void execute() throws MojoExecutionException {
@@ -138,7 +138,7 @@ public class JidrPackageApp extends AbstractMojo {
 
       getLog().info(String.format("Copy \"%s\" to %s.", artifactFilename, appOutputDir));
 
-      String distribFilename = this.project.getArtifactId() + "-" + this.project.getVersion() + "-" + distribClassifier + "." + DISTRIB_TYPE;
+      String distribFilename = this.project.getArtifactId() + "-" + this.project.getVersion() + "-" + classifier + "." + DISTRIB_TYPE;
 
       ZipFile distrib = new ZipFile(this.project.getBuild().getDirectory() + File.separator + distribFilename);
       ZipParameters zipParameters = new ZipParameters();
@@ -148,7 +148,7 @@ public class JidrPackageApp extends AbstractMojo {
 
       getLog().info(String.format("Create \"%s\" to %s.", distribFilename, this.project.getBuild().getDirectory()));
 
-      this.mavenProjectHelper.attachArtifact(this.project, DISTRIB_TYPE, distribClassifier, distrib.getFile());
+      this.mavenProjectHelper.attachArtifact(this.project, DISTRIB_TYPE, classifier, distrib.getFile());
       getLog().info(String.format("Attach \"%s\".", distribFilename));
 
     } catch (Exception exception) {
