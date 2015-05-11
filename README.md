@@ -17,7 +17,7 @@ The application configuration is also packaged in a zip file.
 
 The "install" phase merges the configuration content in the application conf/ sub directory.
 
-The admin script supports the application versionning : install and deploy the 1.2.0, install the next one, rollback.
+The admin script supports the application versionning : install and deploy the 1.2.0, install the next one, rollback if needed ... etc.
 
 # admin.sh _script_
 
@@ -29,7 +29,7 @@ It can perform :
 * rollback
 * health
 
-Some new specific commands can be added in order to be forwared to the application.
+Some new specific commands can be added as could be forwarded to the application.
 
 # app.sh _script_
 
@@ -118,11 +118,11 @@ Invoke the following command  if the previous deployment has been failed :
 
 # _app_ run
 
-The usual commands are performed on the **current"" version application.
+The usual commands are performed on the **current** version application.
 
 # _app_ versions
 
-Suppose you have versions : 1.0, 1.1 and you want to deploy the 1.2.
+Suppose you have 2 versions : 1.0, 1.1 and you want to deploy the new 1.2.
 
 Before installing : 
 
@@ -142,8 +142,7 @@ After deploying :
 * 1.0 : 
 
 And now, suppose you want to deploy the 1.3.
-
-After installing , the old version 1.0 has been removed
+After installing, the old version 1.0 has been removed.
 
 * 1.3 : to_deploy
 * 1.2 : current
