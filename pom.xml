@@ -23,7 +23,7 @@
   <groupId>com.github.scizeron.jidr</groupId>
   <artifactId>jidr-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.9-SNAPSHOT</version>
+  <version>1.0.10-SNAPSHOT</version>
 
   <name>Java Install Deploy Run</name>
   <description>Java Install Deploy Run</description>
@@ -85,7 +85,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.6.1</version>
+        <version>1.6</version>
         <configuration>
          <skip>true</skip>
         </configuration>
