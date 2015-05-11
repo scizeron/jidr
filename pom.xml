@@ -51,7 +51,7 @@
     <connection>scm:git:git@github.com:scizeron/jidr.git</connection>
     <developerConnection>scm:git:git@github.com:scizeron/jidr.git</developerConnection>
     <url>https://github.com/scizeron/jidr</url>
-    <tag>v{project.version}.RELEASE</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
