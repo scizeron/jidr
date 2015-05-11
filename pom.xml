@@ -75,19 +75,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.5</version>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>v{project.version}.RELEASE</tagNameFormat>
           <preparationGoals>clean package -Dmaven.test.skip=true</preparationGoals>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.6</version>
-        <configuration>
-          <skip>true</skip>
         </configuration>
       </plugin>
     </plugins>
