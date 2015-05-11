@@ -52,15 +52,10 @@ The application and the configuration files can be located on a nexus instance (
 Add the maven plugin in your pom.xml application in order to produce a 'distrib' zip file.
 
     <plugin>
-     <groupId>com.stfciz.jidr</groupId>
-     <artifactId>app-runner-maven-plugin</artifactId>
-     <version>1.0.5</version>
-     <executions>
-      <execution>
-       <id>distrib</id>
-       <goals><goal>distrib</goal></goals>
-      </execution>
-     </executions>
+     <groupId>com.github.scizeron.jidr</groupId>
+     <artifactId>jidr-app-maven-plugin</artifactId>
+     <version>1.0.9-SNAPSHOT</version>
+     <executions><execution><goals><goal>package</goal></goals></execution></executions>
     </plugin>
 
 # Package the configuration
