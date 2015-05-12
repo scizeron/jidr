@@ -23,7 +23,7 @@
   <groupId>com.github.scizeron.jidr</groupId>
   <artifactId>jidr-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.18-SNAPSHOT</version>
+  <version>1.0.18</version>
 
   <name>Java Install Deploy Run</name>
   <description>Java Install Deploy Run</description>
@@ -50,7 +50,7 @@
     <connection>scm:git:git@github.com:scizeron/jidr.git</connection>
     <developerConnection>scm:git:git@github.com:scizeron/jidr.git</developerConnection>
     <url>https://github.com/scizeron/jidr</url>
-    <tag>HEAD</tag>
+    <tag>v1.0.18.RELEASE</tag>
   </scm>
 
   <properties>
