@@ -23,7 +23,7 @@
   <groupId>com.github.scizeron.jidr</groupId>
   <artifactId>jidr-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.17-SNAPSHOT</version>
+  <version>1.0.18-SNAPSHOT</version>
 
   <name>Java Install Deploy Run</name>
   <description>Java Install Deploy Run</description>
@@ -77,7 +77,7 @@
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>v@{project.version}.RELEASE</tagNameFormat>
-          <preparationGoals>clean package -Dmaven.test.skip=true</preparationGoals>
+          <preparationGoals>clean install -Dmaven.test.skip=true</preparationGoals>
           <useReleaseProfile>false</useReleaseProfile>
           <releaseProfiles>release</releaseProfiles>
          <goals>deploy</goals>
