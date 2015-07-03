@@ -23,7 +23,6 @@
   </parent>
 
   <artifactId>jidr-app-conf</artifactId>
-  <packaging>pom</packaging>
   
   <name>Jidr App Conf</name>
   <description>Configuration projects reference this assembly</description>
